@@ -1,1 +1,8 @@
-sound-delay/
+sound-delay/*
+.mp4
+.wav
+.png
+!sound-delay/video.mp4
+!sound-delay/video.png
+!sound-delay/video.wav
+!images/*
