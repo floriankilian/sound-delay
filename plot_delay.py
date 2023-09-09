@@ -112,7 +112,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 # Create time axis for video based on frame rate
-time_video = np.linspace(0., nframes, nframes, endpoint=False)/float(frame_rate)
+time_video = 0.04*np.linspace(0., nframes, nframes, endpoint=False)
 
 #
 # Plot signals
