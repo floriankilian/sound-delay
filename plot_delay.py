@@ -53,7 +53,6 @@ def get_video_path():
             print("Video not found. Please check the path and try again.")
 
 def get_audio_path(video_path=None):
-    global audio_path
     """ path for the audio."""
     audio_path = extract_audio_from_video(video_path)
     
@@ -80,7 +79,6 @@ def process_audio(audio_path):
     return loudness, time_audio
 
 def process_video(video_path):
-    global frame_rate
     """Extract the red channel intensity over time from the given video file."""
     print('Processing video...')
     cap = cv2.VideoCapture(video_path)
@@ -105,7 +103,7 @@ def process_video(video_path):
     # cv2.destroyAllWindows()
 
 
-    time_video = 0.04 * np.linspace(0., nframes, nframes, endpoint=False)
+    time_video = (1./frame_rate) * np.linspace(0., nframes, nframes, endpoint=False)
     return red_intensity, time_video
 
 def plot_signals(loudness, time_audio, red_intensity, time_video, video_path):
@@ -142,8 +140,12 @@ def plot_signals(loudness, time_audio, red_intensity, time_video, video_path):
     # show the plot
     plt.show()
 
-def main(video_path=None, audio_path=None):
-    global loudness, time_audio, red_intensity, time_video
+def main(video_path2=None, audio_path2=None):
+    global loudness, time_audio, red_intensity, time_video, audio_path, video_path, frame_rate
+    loudness = time_audio = red_intensity = time_video = None # set all global values to None
+    audio_path = audio_path2
+    video_path = video_path2
+    frame_rate = 25.0 # set as default
     # If video_path is not given as argument, ask the user
     if not video_path:
         video_path = get_video_path()
